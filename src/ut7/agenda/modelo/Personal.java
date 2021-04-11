@@ -23,5 +23,19 @@ public class Personal extends Contacto {
 		return dia;
 	}
 	
-
+	/**
+	 * Devuelve true /false si es el día del cumpleaños o no
+	 *  
+	 */
+	public  boolean esCumpleaños(Contacto otro)  {
+		return this.dia.equals(((Personal) otro).getDia());
+	
+	}
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append(super.toString());
+		sb.append("Fecha de nacimiento: " + dia + "\n");
+		sb.append("Relacion: " + relacion + "\n");
+		return sb.toString();
+	}
 }
