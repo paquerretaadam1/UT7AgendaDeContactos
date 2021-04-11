@@ -30,6 +30,10 @@ public class Personal extends Contacto {
 	public  boolean esCumpleaños(Contacto otro)  {
 		return this.dia.equals(((Personal) otro).getDia());
 	
+		/**
+		 * Representacion textual de contactos personales
+		 *  
+		 */
 	}
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
