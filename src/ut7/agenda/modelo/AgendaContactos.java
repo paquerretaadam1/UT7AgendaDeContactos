@@ -11,7 +11,7 @@ public class AgendaContactos {
 	}
 
 	public void añadirContacto() {
-
+		
 	}
 
 	public void contactosEnLetra() {
@@ -19,7 +19,7 @@ public class AgendaContactos {
 	}
 
 	public void totalContactos() {
-
+		System.out.println(agenda.size());
 	}
 
 	@Override
