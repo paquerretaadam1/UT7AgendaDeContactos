@@ -6,6 +6,7 @@ import java.time.format.DateTimeFormatter;
 public class Personal extends Contacto {
 
 	private LocalDate dia;
+	
 	private Relacion relacion;
 	
 	/**
@@ -23,7 +24,12 @@ public class Personal extends Contacto {
 	public LocalDate getDia() {
 		return dia;
 	}
-	
+	public void setDia(String dia) {
+		this.dia = LocalDate.parse(dia, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+	}
+	public void setRelacion(Relacion relacion) {
+		this.relacion = relacion;
+	}
 	/**
 	 * Devuelve true /false si es el día del cumpleaños o no
 	 *  
