@@ -6,7 +6,6 @@ import java.time.format.DateTimeFormatter;
 public class Personal extends Contacto {
 
 	private LocalDate dia;
-
 	private Relacion relacion;
 
 	/**
