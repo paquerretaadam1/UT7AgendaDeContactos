@@ -83,7 +83,7 @@ public abstract class Contacto implements Comparable<Contacto> {
 
 	}
 
-	public abstract String Firmar();
+	public abstract String getFirmaEmail();
 
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
