@@ -1,5 +1,9 @@
 package ut7.agenda.modelo;
 
+/*
+ * 
+ * @author Pedro J. Aquerreta y David Sena
+ */
 public abstract class Contacto implements Comparable<Contacto> {
 	private String nombre;
 	private String apellidos;
@@ -13,34 +17,66 @@ public abstract class Contacto implements Comparable<Contacto> {
 		this.email = email.toLowerCase();
 	}
 
+	/**
+	 * 
+	 * accesor del nombre
+	 */
 	public String getNombre() {
 		return nombre;
 	}
 
+	/**
+	 * 
+	 * mutador del nombre
+	 */
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
 
+	/**
+	 * 
+	 * accesor del apellidos
+	 */
 	public String getApellidos() {
 		return apellidos;
 	}
 
+	/**
+	 * 
+	 * mutador del apellidos
+	 */
 	public void setApellidos(String apellidos) {
 		this.apellidos = apellidos;
 	}
 
+	/**
+	 * 
+	 * accesor del telefono
+	 */
 	public String getTelefono() {
 		return telefono;
 	}
 
+	/**
+	 * 
+	 * mutador del telefono
+	 */
 	public void setTelefono(String telefono) {
 		this.telefono = telefono;
 	}
 
+	/**
+	 * 
+	 * mutador del email
+	 */
 	public String getEmail() {
 		return email;
 	}
 
+	/**
+	 * 
+	 * mutador del email
+	 */
 	public void setEmail(String email) {
 		this.email = email;
 	}

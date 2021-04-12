@@ -1,5 +1,9 @@
 package ut7.agenda.modelo;
 
+/*
+ * 
+ * @author Pedro J. Aquerreta y David Sena
+ */
 public class Profesional extends Contacto {
 
 	private String empresa;
@@ -9,6 +13,7 @@ public class Profesional extends Contacto {
 				crearNombreEmpresa(email));
 		this.setEmpresa(crearNombreEmpresa(empresa.toUpperCase()));
 	}
+
 	/*
 	 * Formatea el nombre de la empresa
 	 * 

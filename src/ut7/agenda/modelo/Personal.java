@@ -3,6 +3,10 @@ package ut7.agenda.modelo;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/*
+ * 
+ * @author Pedro J. Aquerreta y David Sena
+ */
 public class Personal extends Contacto {
 
 	private LocalDate dia;
