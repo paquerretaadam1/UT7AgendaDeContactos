@@ -59,6 +59,10 @@ public abstract class Contacto implements Comparable<Contacto> {
 		return this.apellidos.charAt(0);
 	}
 
+	/**
+	 * Reescribo equals para saber si dos objetos contactos son iguales
+	 * 
+	 */
 	public boolean equals(Contacto c) {
 		if (c == null) {
 			return false;
@@ -74,6 +78,12 @@ public abstract class Contacto implements Comparable<Contacto> {
 				&& c.getEmail().equalsIgnoreCase(this.getEmail());
 	}
 
+	/**
+	 * Reescribo compareTo para poder ordenar, comparar, etc objetos de tipo
+	 * contacto
+	 * 
+	 */
+	@Override
 	public int compareTo(Contacto c) {
 		int resul = this.getApellidos().compareTo(c.getApellidos());
 		if (resul != 0) {
@@ -85,11 +95,16 @@ public abstract class Contacto implements Comparable<Contacto> {
 
 	public abstract String getFirmaEmail();
 
+	/**
+	 * Representacion textual de contactos
+	 * 
+	 */
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append(this.getApellidos() + ",");
-		sb.append(this.getNombre() + "(" + this.getClass().getSimpleName() + ")\n");
-		sb.append("Tlfn: " + this.getTelefono() + " |  " + "email" + this.getEmail());
+		sb.append(this.getApellidos() + ", ");
+		sb.append(this.getNombre() + " (" + this.getClass().getSimpleName().toUpperCase() + ")\n");
+		sb.append("Tlfn: " + this.getTelefono() + " |  email: " + this.getEmail());
 		return sb.toString();
 	}
+
 }
