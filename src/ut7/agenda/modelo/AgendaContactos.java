@@ -8,21 +8,21 @@ import java.util.TreeMap;
 import java.util.TreeSet;
 
 public class AgendaContactos {
-	private Map<Character, Set<Contacto>> agenda;
+	private TreeMap<Character, TreeSet<Contacto>> agenda;
 
 	public AgendaContactos() {
-		agenda = new TreeMap<>();
+		agenda = new TreeMap<Character, TreeSet<Contacto>>();
 	}
 
 	public void añadirContacto(Contacto c) {
 
 		if (agenda.containsKey(c.getPrimeraLetra())) {
 			Set<Contacto> contactos = agenda.get(c.getPrimeraLetra());
-			agenda.put(c.getPrimeraLetra(), añadirEnOrden(contactos, c));
+			this.agenda.put(c.getPrimeraLetra(), añadirEnOrden(contactos, c));
 		} else {
 			TreeSet<Contacto> contactos = new TreeSet<Contacto>();
 			contactos.add(c);
-			agenda.put(c.getPrimeraLetra(), contactos);
+			this.agenda.put(c.getPrimeraLetra(), contactos);
 
 		}
 
@@ -44,27 +44,23 @@ public class AgendaContactos {
 		System.out.println(agenda.size());
 	}
 
-	@Override
 	public String toString() {
+		System.out.println(this.agenda.keySet());
 		StringBuilder sb = new StringBuilder();
+
 		for (char clave : agenda.keySet()) {
 			for (Contacto c : agenda.get(clave)) {
 				sb.append(c.toString());
 			}
+
 		}
+
 		return sb.toString();
 	}
 
-//	public List<Contacto> buscarContactos(String texto) {
-//		List<Contacto> buscaContacto = new ArrayList<>();
-//		for(Contacto contact:buscaContacto)
-//			if (contact.getNombre()
-//		return null;
-//
-//	}
-
 	public List<Contacto> buscarContactos(String texto) {
 		List<Contacto> buscaContacto = new ArrayList<>();
+
 		for (char clave : agenda.keySet()) {
 			for (Contacto contact : agenda.get(clave)) {
 				if (contact.getNombre().contains(texto) || contact.getApellidos().contains(texto)) {
@@ -77,8 +73,13 @@ public class AgendaContactos {
 	}
 
 	public List<Personal> personalesEnLetra(char letra) {
-
-		return null;
+		List<Personal> resul = new ArrayList<>();
+		for (Contacto personal : agenda.get(letra)) {
+			if (personal instanceof Personal) {
+				resul.add((Personal) personal);
+			}
+		}
+		return resul;
 	}
 
 	public List<Personal> felicitar() {
@@ -96,14 +97,35 @@ public class AgendaContactos {
 		return cumpleañeros;
 	}
 
-	public void personalesPorRelacion() {
+	public Map<Relacion, List<String>> personalesPorRelacion() {
 
+		Map<Relacion, List<String>> resul = new TreeMap<Relacion, List<String>>();
+
+		for (char clave : agenda.keySet()) {
+			for (Contacto personal : agenda.get(clave)) {
+				if (personal instanceof Personal) {
+					ArrayList<String> nombresFormateados = new ArrayList<>();
+					nombresFormateados.add(crearNombre(((Personal) personal)));
+					nombresFormateados.sort((n1, n2) -> n1.compareToIgnoreCase(n2));
+					resul.put(((Personal) personal).getRelacion(), nombresFormateados);
+
+				}
+			}
+
+		}
+
+		return resul;
 	}
 
-	public List<Personal> personalesOrdenadosPorFechaNacimiento(char letra) {
-
-		return null;
-
+	private String crearNombre(Personal p) {
+		return p.getApellidos() + " " + p.getNombre();
 	}
+
+//	public List<Personal> personalesOrdenadosPorFechaNacimiento(char letra) {
+//		List<Personal> resul = personalesEnLetra(letra);
+//		resul.sort((p1, p2) -> p1.compareTo(p2));
+//		return resul;
+
+//	}
 
 }

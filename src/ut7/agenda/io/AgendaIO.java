@@ -12,9 +12,10 @@ import ut7.agenda.modelo.Relacion;
 public class AgendaIO {
 
 	public static void importar(AgendaContactos agenda) {
-		AgendaContactos ag = new AgendaContactos();
+
 		for (String contacto : obtenerLineasDatos()) {
-			ag.añadirContacto(parsearLinea(contacto));
+			Contacto c = parsearLinea(contacto);
+			agenda.añadirContacto(c);
 		}
 
 	}

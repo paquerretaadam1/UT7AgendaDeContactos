@@ -93,4 +93,12 @@ public class Personal extends Contacto {
 
 	}
 
+	public int compareTo(Personal p) {
+		if (this.getFechaCumple().compareTo(p.getFechaCumple()) > 1) {
+			return 1;
+		} else if (this.getFechaCumple().compareTo(p.getFechaCumple()) == 1) {
+			return 0;
+		}
+		return -1;
+	}
 }
