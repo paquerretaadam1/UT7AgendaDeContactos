@@ -15,7 +15,8 @@ public class Personal extends Contacto {
 	/**
 	 * Constructor
 	 */
-	public Personal(String nombre, String apellidos, String telefono, String email, String fechaCumple, Relacion relacion) {
+	public Personal(String nombre, String apellidos, String telefono, String email, String fechaCumple,
+			Relacion relacion) {
 		super(nombre, apellidos, telefono, email);
 		this.fechaCumple = LocalDate.parse(fechaCumple, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
 		this.relacion = relacion;
@@ -45,8 +46,6 @@ public class Personal extends Contacto {
 		this.fechaCumple = LocalDate.parse(fechaCumple, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
 	}
 
-
-
 	/**
 	 * Setter relacion
 	 * 
@@ -59,7 +58,7 @@ public class Personal extends Contacto {
 	 * Devuelve true /false si es el día del cumpleaños o no
 	 * 
 	 */
-	public boolean esCumpleaños(){
+	public boolean esCumpleaños() {
 		LocalDate fechaActual = LocalDate.now();
 		return this.fechaCumple.getMonth().equals(fechaActual.getMonth())
 				&& (this.fechaCumple.getDayOfMonth() == (fechaActual.getDayOfMonth()));
@@ -82,10 +81,7 @@ public class Personal extends Contacto {
 	 * Formatea la fecha para el toString()
 	 */
 	private String formatearFecha(LocalDate fechaCumple) {
-		StringBuilder sb = new StringBuilder();
-		sb.append(fechaCumple.getDayOfMonth() + " " + ("" + fechaCumple.getMonth()).substring(0, 2) + ". " + fechaCumple.getYear());
-		return sb.toString();
-
+		return fechaCumple.format(DateTimeFormatter.ofPattern("dd MMM yyyy"));
 	}
 
 	/**
