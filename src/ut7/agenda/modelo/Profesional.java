@@ -1,6 +1,6 @@
 package ut7.agenda.modelo;
 
-/*
+/**
  * 
  * @author Pedro J. Aquerreta y David Sena
  */
@@ -9,12 +9,11 @@ public class Profesional extends Contacto {
 	private String empresa;
 
 	public Profesional(String nombre, String apellidos, String telefono, String email, String empresa) {
-		super(crearNombreEmpresa(nombre), crearNombreEmpresa(apellidos), crearNombreEmpresa(telefono),
-				crearNombreEmpresa(email));
+		super(nombre, apellidos, telefono, email);
 		this.setEmpresa(crearNombreEmpresa(empresa.toUpperCase()));
 	}
 
-	/*
+	/**
 	 * Formatea el nombre de la empresa
 	 * 
 	 */
@@ -27,7 +26,7 @@ public class Profesional extends Contacto {
 		return sb.toString();
 	}
 
-	/*
+	/**
 	 * Getter empresa
 	 * 
 	 */
@@ -35,7 +34,7 @@ public class Profesional extends Contacto {
 		return empresa;
 	}
 
-	/*
+	/**
 	 * Setter empresa
 	 * 
 	 */
@@ -43,7 +42,7 @@ public class Profesional extends Contacto {
 		this.empresa = crearNombreEmpresa(empresa.toUpperCase());
 	}
 
-	/*
+	/**
 	 * Selecciona una firma aleatoria para los contactos profesionales
 	 * 
 	 */

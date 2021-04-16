@@ -1,6 +1,6 @@
 package ut7.agenda.modelo;
 
-/*
+/**
  * 
  * @author Pedro J. Aquerreta y David Sena
  */

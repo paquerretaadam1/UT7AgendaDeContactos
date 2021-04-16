@@ -1,6 +1,6 @@
 package ut7.agenda.modelo;
 
-/*
+/**
  * 
  * @author Pedro J. Aquerreta y David Sena
  */
@@ -110,8 +110,7 @@ public abstract class Contacto implements Comparable<Contacto> {
 			return false;
 		}
 		return c.getApellidos().equalsIgnoreCase(this.getApellidos())
-				&& c.getNombre().equalsIgnoreCase(this.getApellidos())
-				&& c.getEmail().equalsIgnoreCase(this.getEmail());
+				&& c.getNombre().equalsIgnoreCase(this.getNombre()) && c.getEmail().equalsIgnoreCase(this.getEmail());
 	}
 
 	/**

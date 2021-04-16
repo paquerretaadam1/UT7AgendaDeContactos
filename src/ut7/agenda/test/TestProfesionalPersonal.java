@@ -8,7 +8,7 @@ import ut7.agenda.modelo.Personal;
 import ut7.agenda.modelo.Profesional;
 import ut7.agenda.modelo.Relacion;
 
-/*
+/**
  * 
  * @author Pedro J. Aquerreta y David Sena
  */
