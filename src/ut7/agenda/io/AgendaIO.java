@@ -16,6 +16,7 @@ public class AgendaIO {
 		for (String contacto : obtenerLineasDatos()) {
 			ag.añadirContacto(parsearLinea(contacto));
 		}
+
 	}
 
 	private static Contacto parsearLinea(String linea) {
@@ -27,9 +28,21 @@ public class AgendaIO {
 		if (datos[0].equals("1")) {
 			c = new Profesional(datos[1], datos[2], datos[3], datos[4], datos[5]);
 		} else {
-			Relacion relacion = new Relacion();
-			relacion.setRelacion(datos[6]);
-			c = new Personal(datos[1], datos[2], datos[3], datos[4], datos[5], relacion);
+
+			if (datos[6].equalsIgnoreCase(Relacion.PADRE.getRelacion())) {
+				c = new Personal(datos[1], datos[2], datos[3], datos[4], datos[5], Relacion.PADRE);
+			} else if (datos[6].equalsIgnoreCase(Relacion.MADRE.getRelacion())) {
+				c = new Personal(datos[1], datos[2], datos[3], datos[4], datos[5], Relacion.MADRE);
+			} else if (datos[6].equalsIgnoreCase(Relacion.HIJO.getRelacion())) {
+				c = new Personal(datos[1], datos[2], datos[3], datos[4], datos[5], Relacion.HIJO);
+			} else if (datos[6].equalsIgnoreCase(Relacion.HIJA.getRelacion())) {
+				c = new Personal(datos[1], datos[2], datos[3], datos[4], datos[5], Relacion.HIJA);
+			} else if (datos[6].equalsIgnoreCase(Relacion.AMIGOS.getRelacion())) {
+				c = new Personal(datos[1], datos[2], datos[3], datos[4], datos[5], Relacion.AMIGOS);
+			} else if (datos[6].equalsIgnoreCase(Relacion.PAREJA.getRelacion())) {
+				c = new Personal(datos[1], datos[2], datos[3], datos[4], datos[5], Relacion.PAREJA);
+			}
+
 		}
 		return c;
 

@@ -19,6 +19,7 @@ public class Personal extends Contacto {
 			Relacion relacion) {
 		super(nombre, apellidos, telefono, email);
 		this.fechaCumple = LocalDate.parse(fechaCumple, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+
 		this.relacion = relacion;
 	}
 
