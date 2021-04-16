@@ -1,4 +1,5 @@
 package ut7.agenda.modelo;
+
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -15,8 +16,8 @@ public class AgendaContactos {
 
 	}
 
-	public void añadirContacto() {
-		
+	public void añadirContacto(Contacto c) {
+
 	}
 
 	public Set<Contacto> contactosEnLetra(char caracter) {

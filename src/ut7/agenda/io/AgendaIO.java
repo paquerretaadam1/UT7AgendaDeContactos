@@ -1,6 +1,10 @@
 package ut7.agenda.io;
+
 import ut7.agenda.modelo.AgendaContactos;
 import ut7.agenda.modelo.Contacto;
+import ut7.agenda.modelo.Personal;
+import ut7.agenda.modelo.Profesional;
+import ut7.agenda.modelo.Relacion;
 
 /**
  * Utilidades para cargar la agenda
@@ -8,23 +12,37 @@ import ut7.agenda.modelo.Contacto;
 public class AgendaIO {
 
 	public static void importar(AgendaContactos agenda) {
-
+		AgendaContactos ag = new AgendaContactos();
+		for (String contacto : obtenerLineasDatos()) {
+			ag.añadirContacto(parsearLinea(contacto));
+		}
 	}
 
 	private static Contacto parsearLinea(String linea) {
-		return null;
+		String[] datos = linea.split(",");
+		Contacto c = null;
+		for (int i = 0; i < datos.length; i++) {
+			datos[i] = datos[i].trim();
+		}
+		if (datos[0].equals("1")) {
+			c = new Profesional(datos[1], datos[2], datos[3], datos[4], datos[5]);
+		} else {
+			Relacion relacion = new Relacion();
+			relacion.setRelacion(datos[6]);
+			c = new Personal(datos[1], datos[2], datos[3], datos[4], datos[5], relacion);
+		}
+		return c;
 
 	}
 
 	/**
 	 * 
-	 * @return un array de String con todas las líneas de información de todos
-	 *         los contactos. 1 significa contacto profesional, 2 significa
-	 *         contacto personal
+	 * @return un array de String con todas las líneas de información de todos los
+	 *         contactos. 1 significa contacto profesional, 2 significa contacto
+	 *         personal
 	 */
 	private static String[] obtenerLineasDatos() {
-		return new String[] {
-				"1, Isabel, Acosta Mendioroz,  678895433 ,  iacostamen@gmail.com ,  walden estrella ",
+		return new String[] { "1, Isabel, Acosta Mendioroz,  678895433 ,  iacostamen@gmail.com ,  walden estrella ",
 				"2,  pedro , urruti tello , 616789654 ,  urrutitello@gmail.com , 09/03/2007, amigos",
 				"1, Angel , Esteban Grande , 674544123 ,  aestebang@gmail.com ,  magma publicidad ",
 				"2, elena , bueno ganuza , 6786547699 ,  ebuenogan@gmail.com , 17/03/2000, amigos",
