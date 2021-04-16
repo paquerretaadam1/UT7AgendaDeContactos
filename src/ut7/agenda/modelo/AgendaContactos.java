@@ -1,7 +1,12 @@
 package ut7.agenda.modelo;
 import java.util.List;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
+
+
+
 
 public class AgendaContactos {
 	private Map<Character, Set<Contacto>> agenda;
@@ -14,8 +19,9 @@ public class AgendaContactos {
 		
 	}
 
-	public void contactosEnLetra() {
-
+	public Set<Contacto> contactosEnLetra(char caracter) {
+		return agenda.get(caracter);
+		
 	}
 
 	public void totalContactos() {
@@ -29,7 +35,9 @@ public class AgendaContactos {
 	}
 
 	public List<Contacto> buscarContactos(String texto) {
-
+		List<Contacto> buscaContacto = new ArrayList<>();
+		for(Contacto contact:buscaContacto)
+			if (contact.getNombre()
 		return null;
 
 	}
@@ -40,8 +48,13 @@ public class AgendaContactos {
 	}
 
 	public List<Personal> felicitar() {
-
-		return null;
+		List<Personal> cumpleañeros = new ArrayList<>();
+		for (Personal cumple :cumpleañeros) {
+			if(cumple.esCumpleaños()) {
+				cumpleañeros.add(cumple);
+			}
+		}
+		return cumpleañeros;
 	}
 
 	public void personalesPorRelacion() {
