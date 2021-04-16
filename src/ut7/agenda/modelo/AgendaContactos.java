@@ -63,6 +63,19 @@ public class AgendaContactos {
 //
 //	}
 
+	public List<Contacto> buscarContactos(String texto) {
+		List<Contacto> buscaContacto = new ArrayList<>();
+		for (char clave : agenda.keySet()) {
+			for (Contacto contact : agenda.get(clave)) {
+				if (contact.getNombre().contains(texto) || contact.getApellidos().contains(texto)) {
+					buscaContacto.add((Contacto) contact);
+				}
+			}
+		}
+		return buscaContacto;
+
+	}
+
 	public List<Personal> personalesEnLetra(char letra) {
 
 		return null;
@@ -70,10 +83,15 @@ public class AgendaContactos {
 
 	public List<Personal> felicitar() {
 		List<Personal> cumpleañeros = new ArrayList<>();
-		for (Personal cumple : cumpleañeros) {
-			if (cumple.esCumpleaños()) {
-				cumpleañeros.add(cumple);
+
+		for (char clave : agenda.keySet()) {
+			for (Contacto cumple : agenda.get(clave)) {
+				if (cumple instanceof Personal && ((Personal) cumple).esCumpleaños()) {
+					cumpleañeros.add((Personal) cumple);
+
+				}
 			}
+
 		}
 		return cumpleañeros;
 	}
