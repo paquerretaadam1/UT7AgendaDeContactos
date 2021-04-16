@@ -2,7 +2,6 @@ package ut7.agenda.modelo;
 
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
@@ -37,9 +36,12 @@ public class AgendaContactos {
 
 	public List<Contacto> buscarContactos(String texto) {
 		List<Contacto> buscaContacto = new ArrayList<>();
-		for(Contacto contact:buscaContacto)
-			if (contact.getNombre()
-		return null;
+		for(Contacto contact:buscaContacto) {
+			if (contact.getNombre().contains(texto) && contact.getApellidos().contains(texto)) {
+				buscaContacto.add(contact);
+			}
+		}
+		return buscaContacto;
 
 	}
 
