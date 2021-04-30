@@ -1,5 +1,12 @@
 package ut7.agenda.io;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.time.format.DateTimeParseException;
+
 import ut7.agenda.modelo.AgendaContactos;
 import ut7.agenda.modelo.Contacto;
 import ut7.agenda.modelo.Personal;
@@ -11,62 +18,66 @@ import ut7.agenda.modelo.Relacion;
  */
 public class AgendaIO {
 
-	public static void importar(AgendaContactos agenda) {
+	public static int importar(AgendaContactos agenda, String file) {
+		int errores = 0;
+		File f = new File(file);
+		BufferedReader entrada = null;
+		try {
+			entrada = new BufferedReader(new FileReader(f));
+			String linea = entrada.readLine();
+			while (linea != null) {
+				try {
+					Contacto c = parsearLinea(linea);
+					agenda.añadirContacto(c);
+				} catch (NumberFormatException e) {
+					System.out.println(e.getMessage());
+					errores++;
+				} catch (DateTimeParseException e) {
 
-		for (String contacto : obtenerLineasDatos()) {
-			Contacto c = parsearLinea(contacto);
-			agenda.añadirContacto(c);
+					errores++;
+				} catch (IllegalArgumentException e) {
+					System.out.println(e.getMessage());
+					errores++;
+
+				}
+
+				linea = entrada.readLine();
+
+			}
+		} catch (FileNotFoundException e) {
+			System.out.println("Error al abrir fichero " + e.getMessage());
+		} catch (IOException e) {
+			System.out.println("Error al leer" + e.getMessage());
+		} finally {
+
+			try {
+				entrada.close();
+			} catch (IOException e) {
+				System.out.println("Error al cerrar" + e.getMessage());
+			} catch (NullPointerException e) {
+				System.out.println("Error al cerrar " + e.getMessage());
+			}
 		}
+		return errores;
 
 	}
 
-	private static Contacto parsearLinea(String linea) {
+	private static Contacto parsearLinea(String linea)
+			throws NumberFormatException, DateTimeParseException, IllegalArgumentException {
 		String[] datos = linea.split(",");
-		Contacto c = null;
 		for (int i = 0; i < datos.length; i++) {
 			datos[i] = datos[i].trim();
 		}
+
+		Contacto c = null;
 		if (datos[0].equals("1")) {
 			c = new Profesional(datos[1], datos[2], datos[3], datos[4], datos[5]);
 		} else {
 
 			c = new Personal(datos[1], datos[2], datos[3], datos[4], datos[5],
-					Relacion.valueOf(datos[6].trim().toUpperCase()));
-
+					Relacion.valueOf(datos[6].toUpperCase()));
 		}
 		return c;
-
-	}
-
-	/**
-	 * 
-	 * @return un array de String con todas las líneas de información de todos los
-	 *         contactos. 1 significa contacto profesional, 2 significa contacto
-	 *         personal
-	 */
-	private static String[] obtenerLineasDatos() {
-		return new String[] { "1, Isabel, Acosta Mendioroz,  678895433 ,  iacostamen@gmail.com ,  walden estrella ",
-				"2,  pedro , urruti tello , 616789654 ,  urrutitello@gmail.com , 09/03/2007, amigos",
-				"1, Angel , Esteban Grande , 674544123 ,  aestebang@gmail.com ,  magma publicidad ",
-				"2, elena , bueno ganuza , 6786547699 ,  ebuenogan@gmail.com , 17/03/2000, amigos",
-				"2, amaia , romero sein , 642222343 ,  aromerosein@gmail.com , 09/03/2012, pareja",
-				"2, Ignacio ,  Anto roth ,  688912799 , iantoroth@gmail.com ,  11/11/1969 , padre",
-				"1,  Isabel ,  Acosta Marin , 678895433 ,  iacostamar@gmail.com ,  publicidad holdings ",
-				"1 ,    roberto , casas maura , 666777888 ,  rocasasma@gmail.com ,  strato banca ",
-				"1,juan maria, garcía oliva, 699898111, jmgarcioliva@gmail.com, conway motor ",
-				"2, pedro , urruti tello , 616789654 ,  urrutitello@gmail.com , 17/03/2000, amigos",
-				"1,marta, sanz iris, 622999876, msanzi@gmail.com, jump literatura ",
-				"1,javier, porto luque, 691256777 , japorlu@gmail.com, gas natural ",
-				"1,pablo, ponce larraoz, 689123456, pabloponce@gmail.com, la caixa",
-				"1, javier, marin lancho, 666666666, jruizlanchoe@gmail.com, bbva",
-				"1,juan maria, garcía oliva, 699898111, jmgarcioliva@gmail.com, conway motor ",
-				"2, Berta ,  andia solano ,  621123345 , bandiasol@gmail.com ,  12/12/1999 ,  HIJA",
-				"2, Ignacio ,  Anto roth ,  688912799 , iantoroth@gmail.com ,  11/11/1969 , padre",
-				"  1,  roberto , casas maura , 666777888 ,  rocasasma@gmail.com ,  strato banca ",
-				" 2, daniel , martin martin , 678901234 ,  damrtinmartin@gmail.com , 15/07/1980, amigos",
-				"  2, pablo , martin abradelo , 667788899 ,  martinabra@gmail.com , 31/01/2010, amigos",
-				"  2, susana , santaolalla bilbao , 676767676 ,  ssantaolalla@gmail.com , 17/03/1998, amigos",
-				"  2, adur ,  martin merino ,  611112113 , adurmartinme@gmail.com ,  14/02/2003 , amigos" };
 
 	}
 

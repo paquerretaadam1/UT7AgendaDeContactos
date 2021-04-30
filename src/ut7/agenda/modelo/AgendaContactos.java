@@ -39,7 +39,7 @@ public class AgendaContactos {
 			total += agenda.get(clave).size();
 
 		}
-		System.out.println(total);
+		System.out.print(total);
 	}
 
 	public String toString() {
@@ -53,6 +53,7 @@ public class AgendaContactos {
 				sb.append(c.toString() + "\n");
 			}
 		}
+
 		return sb.toString();
 	}
 
