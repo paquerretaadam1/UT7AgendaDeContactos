@@ -1,14 +1,13 @@
 package ut7.agenda.test;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Map;
 
 import ut7.agenda.io.AgendaIO;
 import ut7.agenda.modelo.AgendaContactos;
 import ut7.agenda.modelo.Contacto;
 import ut7.agenda.modelo.Personal;
-import ut7.agenda.modelo.Relacion;
 
 public class TestAgenda {
 
@@ -40,8 +39,15 @@ public class TestAgenda {
 		personalesOrdenadosPorFecha(agenda, 'w');
 		separador();
 
-		personalesPorRelacion(agenda);
+		System.out.println("Exportados personales agrupados por relación");
 		separador();
+
+		try {
+			AgendaIO.exportarPersonales(agenda, "personales");
+		} catch (IOException e) {
+			System.out.println("Error al guardar en fichero. " + e.getMessage());
+
+		}
 
 	}
 
@@ -77,11 +83,6 @@ public class TestAgenda {
 			agenda.personalesOrdenadosPorFechaNacimiento(letra).forEach(contacto -> System.out.println(contacto));
 		}
 
-	}
-
-	private static void personalesPorRelacion(AgendaContactos agenda) {
-		Map<Relacion, List<String>> map = agenda.personalesPorRelacion();
-		map.forEach((key, value) -> System.out.println(key + "\n\t" + value));
 	}
 
 	private static void separador() {

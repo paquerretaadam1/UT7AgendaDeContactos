@@ -1,11 +1,16 @@
 package ut7.agenda.io;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.time.format.DateTimeParseException;
+import java.util.List;
+import java.util.Map;
 
 import ut7.agenda.modelo.AgendaContactos;
 import ut7.agenda.modelo.Contacto;
@@ -78,6 +83,28 @@ public class AgendaIO {
 					Relacion.valueOf(datos[6].toUpperCase()));
 		}
 		return c;
+
+	}
+
+	public static void exportarPersonales(AgendaContactos agenda, String fichero) throws IOException {
+
+		File f = new File(fichero);
+		PrintWriter salida = null;
+
+		try {
+			salida = new PrintWriter(new BufferedWriter(new FileWriter(f)));
+			Map<Relacion, List<String>> personales = agenda.personalesPorRelacion();
+			for (Relacion clave : personales.keySet()) {
+				salida.printf(clave + "\n\t" + personales.get(clave).toString() + "\n");
+			}
+		} finally {
+			try {
+				salida.close();
+			} catch (NullPointerException e) {
+				System.out.println("Error el cerrar " + e.getMessage());
+			}
+
+		}
 
 	}
 
