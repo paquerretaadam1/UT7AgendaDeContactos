@@ -35,13 +35,13 @@ public class AgendaIO {
 					Contacto c = parsearLinea(linea);
 					agenda.añadirContacto(c);
 				} catch (NumberFormatException e) {
-					System.out.println(e.getMessage());
+
 					errores++;
 				} catch (DateTimeParseException e) {
 
 					errores++;
 				} catch (IllegalArgumentException e) {
-					System.out.println(e.getMessage());
+
 					errores++;
 
 				}

@@ -12,15 +12,16 @@ import agenda.modelo.Personal;
 public class TestAgenda {
 
 	public static void main(String[] args) {
+		System.out.println("---------------------------------------------------------------------------");
 
 		AgendaContactos agenda = new AgendaContactos();
 
-		System.out.println(AgendaIO.importar(agenda, "agenda.csv"));
+		System.out.println(AgendaIO.importar(agenda, "agenda.csv") + " líneas erroneas\n");
 
 		System.out.println(agenda.toString());
-		System.out.print("Hay ");
+		System.out.print("(");
 		agenda.totalContactos();
-		System.out.print(" contactos.");
+		System.out.print(" contacto/s)\n");
 		separador();
 
 		buscarContactos(agenda, "acos");
