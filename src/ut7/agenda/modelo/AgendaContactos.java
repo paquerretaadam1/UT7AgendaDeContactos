@@ -41,7 +41,12 @@ public class AgendaContactos {
 	}
 
 	public void totalContactos() {
-		System.out.println(agenda.size());
+		int total = 0;
+		for (Character clave : agenda.keySet()) {
+			total += agenda.get(clave).size();
+
+		}
+		System.out.println(total);
 	}
 
 	public String toString() {
@@ -60,11 +65,12 @@ public class AgendaContactos {
 
 	public List<Contacto> buscarContactos(String texto) {
 		List<Contacto> buscaContacto = new ArrayList<>();
-
+		texto = texto.toUpperCase();
 		for (char clave : agenda.keySet()) {
 			for (Contacto contact : agenda.get(clave)) {
-				if (contact.getNombre().contains(texto) || contact.getApellidos().contains(texto)) {
-					buscaContacto.add((Contacto) contact);
+				if (contact.getNombre().toUpperCase().contains(texto)
+						|| contact.getApellidos().toUpperCase().contains(texto)) {
+					buscaContacto.add(contact);
 				}
 			}
 		}
