@@ -29,12 +29,12 @@ public class TestAgenda {
 		felicitar(agenda);
 		separador();
 
-//		personalesOrdenadosPorFecha(agenda, 'm');
-//		separador();
-//		personalesOrdenadosPorFecha(agenda, 'e');
-//		separador();
-//		personalesOrdenadosPorFecha(agenda, 'w');
-//		separador();
+		personalesOrdenadosPorFecha(agenda, 'm');
+		separador();
+		personalesOrdenadosPorFecha(agenda, 'e');
+		separador();
+		personalesOrdenadosPorFecha(agenda, 'w');
+		separador();
 
 		personalesPorRelacion(agenda);
 		separador();
@@ -64,16 +64,16 @@ public class TestAgenda {
 
 	}
 
-//	private static void personalesOrdenadosPorFecha(AgendaContactos agenda, char letra) {
-//		System.out.println("Personales en letra " + letra + " ordenados de < a > fecha de nacimiento");
-//		List<Personal> personales = agenda.personalesEnLetra(letra);
-//		if (personales == null) {
-//			System.out.println(letra + " no está en la agenda");
-//		} else {
-//			agenda.personalesOrdenadosPorFechaNacimiento(letra).forEach(contacto -> System.out.println(contacto));
-//		}
-//
-//	}
+	private static void personalesOrdenadosPorFecha(AgendaContactos agenda, char letra) {
+		System.out.println("Personales en letra " + letra + " ordenados de < a > fecha de nacimiento");
+		List<Personal> personales = agenda.personalesEnLetra(letra);
+		if (personales == null) {
+			System.out.println(letra + " no está en la agenda");
+		} else {
+			agenda.personalesOrdenadosPorFechaNacimiento(letra).forEach(contacto -> System.out.println(contacto));
+		}
+
+	}
 
 	private static void personalesPorRelacion(AgendaContactos agenda) {
 		Map<Relacion, List<String>> map = agenda.personalesPorRelacion();

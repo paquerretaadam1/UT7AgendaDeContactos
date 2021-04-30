@@ -8,34 +8,27 @@ import java.util.TreeMap;
 import java.util.TreeSet;
 
 public class AgendaContactos {
-	private TreeMap<Character, TreeSet<Contacto>> agenda;
+	private Map<Character, Set<Contacto>> agenda;
 
 	public AgendaContactos() {
-		agenda = new TreeMap<Character, TreeSet<Contacto>>();
+		agenda = new TreeMap<>();
 	}
 
 	public void añadirContacto(Contacto c) {
 
 		if (agenda.containsKey(c.getPrimeraLetra())) {
 			Set<Contacto> contactos = agenda.get(c.getPrimeraLetra());
-			this.agenda.put(c.getPrimeraLetra(), añadirEnOrden(contactos, c));
+			contactos.add(c);
 		} else {
 			TreeSet<Contacto> contactos = new TreeSet<Contacto>();
 			contactos.add(c);
 			this.agenda.put(c.getPrimeraLetra(), contactos);
-
 		}
 
 	}
 
-	private TreeSet<Contacto> añadirEnOrden(Set<Contacto> original, Contacto aAñadir) {
-		TreeSet<Contacto> resul = new TreeSet<>();
-		resul.addAll(original);
-		resul.add(aAñadir);
-		return resul;
-	}
-
 	public Set<Contacto> contactosEnLetra(char caracter) {
+		caracter = Character.toUpperCase(caracter);
 		return agenda.get(caracter);
 
 	}
@@ -50,16 +43,16 @@ public class AgendaContactos {
 	}
 
 	public String toString() {
-		System.out.println(this.agenda.keySet());
-		StringBuilder sb = new StringBuilder();
 
+		StringBuilder sb = new StringBuilder("AGENDA DE CONTACTOS");
 		for (char clave : agenda.keySet()) {
-			for (Contacto c : agenda.get(clave)) {
-				sb.append(c.toString());
+			Set<Contacto> contactos = agenda.get(clave);
+			sb.append("\n" + clave + " (" + contactos.size() + " contacto/s)\n");
+			sb.append("------------------------\n");
+			for (Contacto c : contactos) {
+				sb.append(c.toString() + "\n");
 			}
-
 		}
-
 		return sb.toString();
 	}
 
@@ -79,6 +72,10 @@ public class AgendaContactos {
 	}
 
 	public List<Personal> personalesEnLetra(char letra) {
+		letra = Character.toUpperCase(letra);
+		if (!agenda.containsKey(letra)) {
+			return null;
+		}
 		List<Personal> resul = new ArrayList<>();
 		for (Contacto personal : agenda.get(letra)) {
 			if (personal instanceof Personal) {
@@ -105,19 +102,23 @@ public class AgendaContactos {
 
 	public Map<Relacion, List<String>> personalesPorRelacion() {
 
-		Map<Relacion, List<String>> resul = new TreeMap<Relacion, List<String>>();
+		Map<Relacion, List<String>> resul = new TreeMap<>();
 
 		for (char clave : agenda.keySet()) {
-			for (Contacto personal : agenda.get(clave)) {
-				if (personal instanceof Personal) {
-					ArrayList<String> nombresFormateados = new ArrayList<>();
-					nombresFormateados.add(crearNombre(((Personal) personal)));
-					nombresFormateados.sort((n1, n2) -> n1.compareToIgnoreCase(n2));
-					resul.put(((Personal) personal).getRelacion(), nombresFormateados);
-
+			for (Contacto contacto : agenda.get(clave)) {
+				if (contacto instanceof Personal) {
+					Personal personal = (Personal) contacto;
+					Relacion relacion = personal.getRelacion();
+					if (!resul.containsKey(relacion)) {
+						ArrayList<String> nombresFormateados = new ArrayList<>();
+						nombresFormateados.add(crearNombre(personal));
+						resul.put(personal.getRelacion(), nombresFormateados);
+					} else {
+						List<String> nombresFormateados = resul.get(relacion);
+						nombresFormateados.add(crearNombre(personal));
+					}
 				}
 			}
-
 		}
 
 		return resul;
@@ -127,11 +128,14 @@ public class AgendaContactos {
 		return p.getApellidos() + " " + p.getNombre();
 	}
 
-//	public List<Personal> personalesOrdenadosPorFechaNacimiento(char letra) {
-//		List<Personal> resul = personalesEnLetra(letra);
-//		resul.sort((p1, p2) -> p1.compareTo(p2));
-//		return resul;
+	public List<Personal> personalesOrdenadosPorFechaNacimiento(char letra) {
+		List<Personal> resul = personalesEnLetra(letra);
 
-//	}
+		if (resul != null && !resul.isEmpty()) {
+			resul.sort((p1, p2) -> p1.getFechaCumple().compareTo(p2.getFechaCumple()));
+		}
+		return resul;
+
+	}
 
 }

@@ -30,19 +30,8 @@ public class AgendaIO {
 			c = new Profesional(datos[1], datos[2], datos[3], datos[4], datos[5]);
 		} else {
 
-			if (datos[6].equalsIgnoreCase(Relacion.PADRE.getRelacion())) {
-				c = new Personal(datos[1], datos[2], datos[3], datos[4], datos[5], Relacion.PADRE);
-			} else if (datos[6].equalsIgnoreCase(Relacion.MADRE.getRelacion())) {
-				c = new Personal(datos[1], datos[2], datos[3], datos[4], datos[5], Relacion.MADRE);
-			} else if (datos[6].equalsIgnoreCase(Relacion.HIJO.getRelacion())) {
-				c = new Personal(datos[1], datos[2], datos[3], datos[4], datos[5], Relacion.HIJO);
-			} else if (datos[6].equalsIgnoreCase(Relacion.HIJA.getRelacion())) {
-				c = new Personal(datos[1], datos[2], datos[3], datos[4], datos[5], Relacion.HIJA);
-			} else if (datos[6].equalsIgnoreCase(Relacion.AMIGOS.getRelacion())) {
-				c = new Personal(datos[1], datos[2], datos[3], datos[4], datos[5], Relacion.AMIGOS);
-			} else if (datos[6].equalsIgnoreCase(Relacion.PAREJA.getRelacion())) {
-				c = new Personal(datos[1], datos[2], datos[3], datos[4], datos[5], Relacion.PAREJA);
-			}
+			c = new Personal(datos[1], datos[2], datos[3], datos[4], datos[5],
+					Relacion.valueOf(datos[6].trim().toUpperCase()));
 
 		}
 		return c;
