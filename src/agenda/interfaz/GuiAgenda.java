@@ -110,22 +110,27 @@ public class GuiAgenda extends Application {
 
 		btnListar = new Button("Listar");
 		btnListar.setPrefWidth(250);
+		btnListar.setId("botones");
 		btnListar.setOnAction(e -> listar());
 
 		btnPersonalesEnLetra = new Button("Contactos personales en letra");
 		btnPersonalesEnLetra.setPrefWidth(250);
+		btnPersonalesEnLetra.setId("botones");
 		btnPersonalesEnLetra.setOnAction(e -> contactosPersonalesEnLetra());
 
 		btnPersonalesOrdenadosPorFecha = new Button("Contactos personales ordenados por fecha");
 		btnPersonalesOrdenadosPorFecha.setPrefWidth(250);
+		btnPersonalesOrdenadosPorFecha.setId("botones");
 		btnPersonalesOrdenadosPorFecha.setOnAction(e -> personalesOrdenadosPorFecha());
 
 		btnClear = new Button("Clear");
 		btnClear.setPrefWidth(250);
+		btnClear.setId("botones");
 		btnClear.setOnAction(e -> clear());
 
 		btnSalir = new Button("Salir");
 		btnSalir.setPrefWidth(250);
+		btnSalir.setId("botones");
 		btnSalir.setOnAction(e -> salir());
 
 		panel.getChildren().addAll(btnListar, btnPersonalesEnLetra, btnPersonalesOrdenadosPorFecha, btnClear, btnSalir);
