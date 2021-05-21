@@ -1,22 +1,23 @@
-package agenda.io;
+package ut7.agenda.io;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.Map;
 
-import agenda.modelo.AgendaContactos;
-import agenda.modelo.Contacto;
-import agenda.modelo.Personal;
-import agenda.modelo.Profesional;
-import agenda.modelo.Relacion;
+import ut7.agenda.modelo.AgendaContactos;
+import ut7.agenda.modelo.Contacto;
+import ut7.agenda.modelo.Personal;
+import ut7.agenda.modelo.Profesional;
+import ut7.agenda.modelo.Relacion;
 
 /**
  * Utilidades para cargar la agenda
@@ -25,23 +26,25 @@ public class AgendaIO {
 
 	public static int importar(AgendaContactos agenda, String file) {
 		int errores = 0;
-		File f = new File(file);
+		InputStream input = AgendaIO.class.getClassLoader().getResourceAsStream(file);
+
 		BufferedReader entrada = null;
 		try {
-			entrada = new BufferedReader(new FileReader(f));
+			entrada = new BufferedReader(new InputStreamReader(input));
+
 			String linea = entrada.readLine();
 			while (linea != null) {
 				try {
 					Contacto c = parsearLinea(linea);
 					agenda.añadirContacto(c);
 				} catch (NumberFormatException e) {
-
+					System.out.println(e.getMessage());
 					errores++;
 				} catch (DateTimeParseException e) {
 
 					errores++;
 				} catch (IllegalArgumentException e) {
-
+					System.out.println(e.getMessage());
 					errores++;
 
 				}
