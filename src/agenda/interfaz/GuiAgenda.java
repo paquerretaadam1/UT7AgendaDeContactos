@@ -97,11 +97,11 @@ public class GuiAgenda extends Application {
 		ToggleGroup grupo = new ToggleGroup();
 		rbtListarTodo.setToggleGroup(grupo);
 		rbtListarSoloNumero.setToggleGroup(grupo);
-
 		panel.getChildren().addAll(rbtListarTodo, rbtListarSoloNumero);
 
 		btnListar = new Button("Listar");
 		btnListar.setPrefWidth(250);
+		btnListar.setPadding(new Insets(0, 0, 40, 0));
 		btnListar.setOnAction(e -> listar());
 
 		btnPersonalesEnLetra = new Button("Contactos personales en letra");
@@ -114,6 +114,7 @@ public class GuiAgenda extends Application {
 
 		btnClear = new Button("Clear");
 		btnClear.setPrefWidth(250);
+		btnClear.setPadding(new Insets(40, 0, 0, 0));
 		btnClear.setOnAction(e -> clear());
 
 		btnSalir = new Button("Salir");

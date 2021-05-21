@@ -33,13 +33,13 @@ public class AgendaContactos {
 
 	}
 
-	public void totalContactos() {
+	public int totalContactos() {
 		int total = 0;
 		for (Character clave : agenda.keySet()) {
 			total += agenda.get(clave).size();
 
 		}
-		System.out.print(total);
+		return total;
 	}
 
 	@Override

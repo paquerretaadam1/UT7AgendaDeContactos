@@ -19,8 +19,7 @@ public class TestAgenda {
 		System.out.println(AgendaIO.importar(agenda, "agenda.csv") + " líneas erroneas\n");
 
 		System.out.println(agenda.toString());
-		System.out.print("(");
-		agenda.totalContactos();
+		System.out.print("Hay " + agenda.totalContactos());
 		System.out.print(" contacto/s)\n");
 		separador();
 
