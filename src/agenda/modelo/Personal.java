@@ -1,4 +1,4 @@
-package agenda.modelo;
+package src.agenda.modelo;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -70,6 +70,7 @@ public class Personal extends Contacto {
 	 * 
 	 */
 
+	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append(super.toString());
@@ -88,6 +89,7 @@ public class Personal extends Contacto {
 	/**
 	 * Firma del contacto personal
 	 */
+	@Override
 	public String getFirmaEmail() {
 		return "Un abrazo!!";
 

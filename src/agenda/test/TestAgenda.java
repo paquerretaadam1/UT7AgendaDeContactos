@@ -1,13 +1,13 @@
-package agenda.test;
+package src.agenda.test;
 
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 
-import agenda.io.AgendaIO;
-import agenda.modelo.AgendaContactos;
-import agenda.modelo.Contacto;
-import agenda.modelo.Personal;
+import src.agenda.io.AgendaIO;
+import src.agenda.modelo.AgendaContactos;
+import src.agenda.modelo.Contacto;
+import src.agenda.modelo.Personal;
 
 public class TestAgenda {
 

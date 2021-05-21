@@ -1,4 +1,4 @@
-package agenda.modelo;
+package src.agenda.modelo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,6 +42,7 @@ public class AgendaContactos {
 		System.out.print(total);
 	}
 
+	@Override
 	public String toString() {
 
 		StringBuilder sb = new StringBuilder("AGENDA DE CONTACTOS");

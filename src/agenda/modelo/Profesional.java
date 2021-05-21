@@ -1,4 +1,4 @@
-package agenda.modelo;
+package src.agenda.modelo;
 
 /**
  * 
@@ -46,6 +46,7 @@ public class Profesional extends Contacto {
 	 * Selecciona una firma aleatoria para los contactos profesionales
 	 * 
 	 */
+	@Override
 	public String getFirmaEmail() {
 		String[] posibilidades = { "Atentamente", "Saludos", "Saludos cordiales", "Mis mejores deseos" };
 		return posibilidades[(int) (Math.random() * 4)];
@@ -55,6 +56,7 @@ public class Profesional extends Contacto {
 	 * Representacion textual de contactos profesionales
 	 * 
 	 */
+	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append(super.toString());

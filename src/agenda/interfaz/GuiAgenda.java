@@ -1,6 +1,5 @@
-package agenda.interfaz;
+package src.agenda.interfaz;
 
-import agenda.modelo.AgendaContactos;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
@@ -15,6 +14,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import src.agenda.modelo.AgendaContactos;
 
 public class GuiAgenda extends Application {
 	private AgendaContactos agenda;
@@ -50,8 +50,7 @@ public class GuiAgenda extends Application {
 		Scene scene = new Scene(root, 1100, 700);
 		stage.setScene(scene);
 		stage.setTitle("Agenda de contactos");
-		scene.getStylesheets().add(getClass().getResource("/application.css")
-		                    .toExternalForm());
+		scene.getStylesheets().add(getClass().getResource("/application.css").toExternalForm());
 		stage.show();
 
 	}

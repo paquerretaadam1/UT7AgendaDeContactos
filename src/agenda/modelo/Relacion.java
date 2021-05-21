@@ -1,4 +1,4 @@
-package agenda.modelo;
+package src.agenda.modelo;
 
 /**
  * 

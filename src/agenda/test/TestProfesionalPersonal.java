@@ -1,12 +1,12 @@
-package agenda.test;
+package src.agenda.test;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import agenda.modelo.Contacto;
-import agenda.modelo.Personal;
-import agenda.modelo.Profesional;
-import agenda.modelo.Relacion;
+import src.agenda.modelo.Contacto;
+import src.agenda.modelo.Personal;
+import src.agenda.modelo.Profesional;
+import src.agenda.modelo.Relacion;
 
 /*
  * 

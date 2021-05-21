@@ -1,4 +1,4 @@
-package ut7.agenda.io;
+package src.agenda.io;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -13,11 +13,11 @@ import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.Map;
 
-import ut7.agenda.modelo.AgendaContactos;
-import ut7.agenda.modelo.Contacto;
-import ut7.agenda.modelo.Personal;
-import ut7.agenda.modelo.Profesional;
-import ut7.agenda.modelo.Relacion;
+import src.agenda.modelo.AgendaContactos;
+import src.agenda.modelo.Contacto;
+import src.agenda.modelo.Personal;
+import src.agenda.modelo.Profesional;
+import src.agenda.modelo.Relacion;
 
 /**
  * Utilidades para cargar la agenda

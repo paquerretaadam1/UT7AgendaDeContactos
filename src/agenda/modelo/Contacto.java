@@ -1,4 +1,4 @@
-package agenda.modelo;
+package src.agenda.modelo;
 
 /**
  * 
@@ -118,6 +118,7 @@ public abstract class Contacto implements Comparable<Contacto> {
 	 * contacto
 	 * 
 	 */
+	@Override
 	public int compareTo(Contacto c) {
 		int resul = this.getApellidos().compareTo(c.getApellidos());
 		if (resul != 0) {
@@ -133,6 +134,7 @@ public abstract class Contacto implements Comparable<Contacto> {
 	 * Representacion textual de contactos
 	 * 
 	 */
+	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append(this.getApellidos() + ", ");
