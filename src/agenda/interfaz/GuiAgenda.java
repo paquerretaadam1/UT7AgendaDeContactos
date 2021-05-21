@@ -1,5 +1,9 @@
 package src.agenda.interfaz;
 
+import java.io.IOException;
+import java.time.LocalDate;
+import java.util.List;
+
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
@@ -7,9 +11,11 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.SeparatorMenuItem;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
@@ -17,7 +23,9 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import src.agenda.io.AgendaIO;
 import src.agenda.modelo.AgendaContactos;
+import src.agenda.modelo.Personal;
 
 public class GuiAgenda extends Application {
 	private AgendaContactos agenda;
@@ -97,11 +105,11 @@ public class GuiAgenda extends Application {
 		ToggleGroup grupo = new ToggleGroup();
 		rbtListarTodo.setToggleGroup(grupo);
 		rbtListarSoloNumero.setToggleGroup(grupo);
+
 		panel.getChildren().addAll(rbtListarTodo, rbtListarSoloNumero);
 
 		btnListar = new Button("Listar");
 		btnListar.setPrefWidth(250);
-		btnListar.setPadding(new Insets(0, 0, 40, 0));
 		btnListar.setOnAction(e -> listar());
 
 		btnPersonalesEnLetra = new Button("Contactos personales en letra");
@@ -114,7 +122,6 @@ public class GuiAgenda extends Application {
 
 		btnClear = new Button("Clear");
 		btnClear.setPrefWidth(250);
-		btnClear.setPadding(new Insets(40, 0, 0, 0));
 		btnClear.setOnAction(e -> clear());
 
 		btnSalir = new Button("Salir");
@@ -126,15 +133,56 @@ public class GuiAgenda extends Application {
 	}
 
 	private GridPane crearPanelLetras() {
-		// a completar
 		GridPane panel = new GridPane();
+		String letras = "ABCDEFGHIJKLMNÑOPQRSTUVWXYZ ";
+		panel.setPadding(new Insets(10));
+		panel.setAlignment(Pos.CENTER);
+		panel.setHgap(5);
+		panel.setVgap(5);
+		for (int fila = 0; fila < 14; fila++) {
+			for (int col = 0; col < 2; col++) {
+				char pos = letras.charAt((fila * 14) + col);
+				if (pos != ' ') {
+					Button btn = new Button("" + pos);
+					btn.setOnAction(e -> contactosEnLetra(pos));
+					btn.setId("button");
+					btn.setMaxSize(Integer.MAX_VALUE, Integer.MAX_VALUE);
+					btn.setId("botonletra");
+					GridPane.setMargin(btn, new Insets(1.5));
+					panel.add(btn, col, fila);
+				}
 
+			}
+		}
 		return panel;
 	}
 
 	private MenuBar crearBarraMenu() {
 		// a completar
 		MenuBar barra = new MenuBar();
+		barra.setId("barramenu");
+		Menu archivo = new Menu("Archivo");
+		Menu operaciones = new Menu("Operaciones");
+		Menu help = new Menu("Help");
+		barra.getMenus().addAll(archivo, operaciones, help);
+
+		itemImportar = new MenuItem("_Importar Agenda");
+		itemImportar.setOnAction(event -> importarAgenda());
+		itemExportarPersonales = new MenuItem("_Exportar");
+		itemExportarPersonales.setOnAction(event -> exportarPersonales());
+		itemSalir = new MenuItem("_Salir");
+		itemSalir.setOnAction(event -> salir());
+		archivo.getItems().addAll(itemImportar, itemExportarPersonales, new SeparatorMenuItem(), itemSalir);
+
+		itemBuscar = new MenuItem("_Buscar");
+//		itemBuscar.setOnAction(event -> factorial());
+		itemFelicitar = new MenuItem("_Felicitar");
+		itemFelicitar.setOnAction(event -> felicitar());
+		operaciones.getItems().addAll(itemBuscar, itemFelicitar);
+
+		itemAbout = new MenuItem("_About");
+//		itemAbout.setOnAction(event -> factorial());
+		help.getItems().addAll(itemAbout);
 
 		return barra;
 	}
@@ -145,7 +193,12 @@ public class GuiAgenda extends Application {
 	}
 
 	private void exportarPersonales() {
-		// a completar
+
+		try {
+			AgendaIO.exportarPersonales(agenda, "Personales");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 
 	}
 
@@ -172,18 +225,28 @@ public class GuiAgenda extends Application {
 
 	private void contactosEnLetra(char letra) {
 		clear();
-		// a completar
+		List<Personal> personales = agenda.personalesEnLetra(letra);
+		if (personales == null) {
+			areaTexto.setText(letra + " no está en la agenda");
+		} else {
+			areaTexto.setText(personales.toString());
+		}
+
 	}
 
 	private void felicitar() {
 		clear();
-		// a completar
+		List<Personal> resultado = agenda.felicitar();
+		if (resultado.isEmpty()) {
+			areaTexto.setText("Hoy no cumple nadie");
+		} else {
+			areaTexto.setText("Hoy es " + LocalDate.now() + "\nHay que felicitar a " + resultado.toString());
+		}
 
 	}
 
 	private void buscar() {
 		clear();
-		// a completar
 
 		cogerFoco();
 
