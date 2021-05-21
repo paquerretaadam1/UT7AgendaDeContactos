@@ -3,13 +3,16 @@ package src.agenda.interfaz;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
@@ -76,9 +79,48 @@ public class GuiAgenda extends Application {
 	}
 
 	private VBox crearPanelBotones() {
-		// a completar
-		VBox panel = new VBox();
 
+		VBox panel = new VBox(10);
+
+		panel.setPadding(new Insets(40, 0, 40, 0));
+		panel.setAlignment(Pos.CENTER);
+
+		txtBuscar = new TextField();
+		txtBuscar.setPrefColumnCount(13);
+		panel.getChildren().addAll(new Label("Buscar"), txtBuscar);
+
+		rbtListarTodo = new RadioButton("Listar toda la agenda");
+		rbtListarTodo.setSelected(true);
+
+		rbtListarSoloNumero = new RadioButton("Listar nº contactos");
+
+		ToggleGroup grupo = new ToggleGroup();
+		rbtListarTodo.setToggleGroup(grupo);
+		rbtListarSoloNumero.setToggleGroup(grupo);
+
+		panel.getChildren().addAll(rbtListarTodo, rbtListarSoloNumero);
+
+		btnListar = new Button("Listar");
+		btnListar.setPrefWidth(250);
+		btnListar.setOnAction(e -> listar());
+
+		btnPersonalesEnLetra = new Button("Contactos personales en letra");
+		btnPersonalesEnLetra.setPrefWidth(250);
+		btnPersonalesEnLetra.setOnAction(e -> contactosPersonalesEnLetra());
+
+		btnPersonalesOrdenadosPorFecha = new Button("Contactos personales ordenados por fecha");
+		btnPersonalesOrdenadosPorFecha.setPrefWidth(250);
+		btnPersonalesOrdenadosPorFecha.setOnAction(e -> personalesOrdenadosPorFecha());
+
+		btnClear = new Button("Clear");
+		btnClear.setPrefWidth(250);
+		btnClear.setOnAction(e -> clear());
+
+		btnSalir = new Button("Salir");
+		btnSalir.setPrefWidth(250);
+		btnSalir.setOnAction(e -> salir());
+
+		panel.getChildren().addAll(btnListar, btnPersonalesEnLetra, btnPersonalesOrdenadosPorFecha, btnClear, btnSalir);
 		return panel;
 	}
 
