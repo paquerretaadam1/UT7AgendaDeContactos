@@ -118,7 +118,6 @@ public abstract class Contacto implements Comparable<Contacto> {
 	 * contacto
 	 * 
 	 */
-	@Override
 	public int compareTo(Contacto c) {
 		int resul = this.getApellidos().compareTo(c.getApellidos());
 		if (resul != 0) {
